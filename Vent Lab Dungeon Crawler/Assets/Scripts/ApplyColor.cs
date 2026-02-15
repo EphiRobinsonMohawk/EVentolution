@@ -3,6 +3,15 @@ using UnityEngine;
 
 public class ApplyPalette : MonoBehaviour
 {
+    public Colour myColour = Colour.primary;
+
+    public enum Colour
+    {
+        primary,
+        secondary,
+        tertiary
+    }
+
     void Start()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -12,8 +21,24 @@ public class ApplyPalette : MonoBehaviour
         float hOriginal, sOriginal, vOriginal;
         Color.RGBToHSV(original, out hOriginal, out sOriginal, out vOriginal);
 
-        float hPalette, sPalette, vPalette;
-        Color.RGBToHSV(GameMan.primaryColor, out hPalette, out sPalette, out vPalette);
+        float hPalette = 0f, sPalette = 0f, vPalette = 0f;
+        if (myColour == Colour.primary)
+        {
+            Color.RGBToHSV(GameMan.primaryColor, out hPalette, out sPalette, out vPalette);
+        }
+        else if (myColour == Colour.secondary)
+        {
+            Color.RGBToHSV(GameMan.secondaryColor, out hPalette, out sPalette, out vPalette);
+        }
+        else if (myColour == Colour.tertiary)
+        {
+            Color.RGBToHSV(GameMan.tertiaryColor, out hPalette, out sPalette, out vPalette);
+        }
+        else
+        {
+            Debug.Log("Palette option is null");
+        }
+        
 
         Color newColor = Color.HSVToRGB(hPalette, sPalette, vOriginal);
 

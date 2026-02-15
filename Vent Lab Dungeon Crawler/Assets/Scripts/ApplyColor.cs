@@ -24,15 +24,15 @@ public class ApplyPalette : MonoBehaviour
         float hPalette = 0f, sPalette = 0f, vPalette = 0f;
         if (myColour == Colour.primary)
         {
-            Color.RGBToHSV(GameMan.primaryColor, out hPalette, out sPalette, out vPalette);
+            Color.RGBToHSV(PaletteMan.primaryColor, out hPalette, out sPalette, out vPalette);
         }
         else if (myColour == Colour.secondary)
         {
-            Color.RGBToHSV(GameMan.secondaryColor, out hPalette, out sPalette, out vPalette);
+            Color.RGBToHSV(PaletteMan.secondaryColor, out hPalette, out sPalette, out vPalette);
         }
         else if (myColour == Colour.tertiary)
         {
-            Color.RGBToHSV(GameMan.tertiaryColor, out hPalette, out sPalette, out vPalette);
+            Color.RGBToHSV(PaletteMan.tertiaryColor, out hPalette, out sPalette, out vPalette);
         }
         else
         {

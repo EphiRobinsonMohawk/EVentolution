@@ -6,27 +6,53 @@ public class PlayerController : MonoBehaviour
     [field: SerializeField] public SpriteRenderer spriteRenderer { get; private set; }
     [field: SerializeField] public Rigidbody2D rb2d { get; private set; }
     [field: SerializeField] public float moveSpeed { get; private set; } = 10f;
-
-    [field: SerializeField] public bool inInteractRange { get; private set; } = false;
+    [field: SerializeField] private bool inInteractRange = false;
+    [field: SerializeField] private bool dead = false;
     [field: SerializeField] public AreaInteract interactTarget { get; private set; } = null;
-    [field: SerializeField] public bool dead = false;
-
     [field: SerializeField] public Pickup itemHolding = null;
 
-    [field: SerializeField] public Transform respawnPOS;
-
-    [field: SerializeField] private float respawnTimer;
-
-    [field: SerializeField] public float respawnTimerMax;
+    [field: SerializeField] private Vector2 input;
 
 
-
+    private void Awake()
+    {
+        GameMan.player = this;
+    }
 
     // Runs each frame
-    public void Update()
+    public void Update() //Input goes here
     {
+        if (dead) Destroy(gameObject);
 
-        
+
+        //Movement Logic
+        input.x = 0f;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            input.x = -1f;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            input.x = 1f;
+        }
+
+        input.y = 0f;
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            input.y = -1f;
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            input.y = 1f;
+        }
+
+        input = input.normalized;
+
+
+
+        //Interact Logic
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (inInteractRange && interactTarget.GetComponent<Pickup>() != null && itemHolding != null)
@@ -46,8 +72,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void FixedUpdate() //Physics go here, runs every physics tick
+    {
+        rb2d.MovePosition(rb2d.position + input * moveSpeed * Time.fixedDeltaTime);
+    }
 
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Death Zone"))

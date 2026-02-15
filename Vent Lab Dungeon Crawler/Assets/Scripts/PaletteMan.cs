@@ -23,23 +23,7 @@ public class PaletteMan : MonoBehaviour
         NewSecondaryColour();
         NewTertiaryColour();
 
-        
-    }
-
-    private void Update()
-    {
-        if (Mathf.Abs(pHPalette - sHPalette) <= paletteColourSeperation) //if s is similar hue to p
-        {
-            NewSecondaryColour();
-        }
-        else if (Mathf.Abs(sHPalette - tHPalette) <= paletteColourSeperation) //if t is similar hue to s
-        {
-            NewTertiaryColour();
-        }
-        else if (Mathf.Abs(pHPalette - tHPalette ) <= paletteColourSeperation) //if t is similar hue to p
-        {
-            NewTertiaryColour();
-        }
+        SeparatePalette();
     }
 
     void NewPrimaryColour()
@@ -63,10 +47,21 @@ public class PaletteMan : MonoBehaviour
     void NewTertiaryColour()
     {
         tertiaryColor = Random.ColorHSV(
-            tMinHue, tMaxSat,
+            tMinHue, tMaxHue,
             tMinSat, tMaxSat,
             0f, 1f
         );
         Color.RGBToHSV(tertiaryColor, out tHPalette, out tSPalette, out tVPalette);
     }
+    void SeparatePalette()
+    {
+        while (Mathf.Abs(pHPalette - sHPalette) <= paletteColourSeperation)
+            NewSecondaryColour();
+
+        while (Mathf.Abs(sHPalette - tHPalette) <= paletteColourSeperation ||
+            Mathf.Abs(pHPalette - tHPalette) <= paletteColourSeperation)
+            NewTertiaryColour();
+    }
 }
+
+

@@ -1853,6 +1853,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2365223236104844336, guid: 39a74533fa93b194da9cd5aa310531af, type: 3}
+      propertyPath: paletteColourSeperation
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 3905957723508317772, guid: 39a74533fa93b194da9cd5aa310531af, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0884799

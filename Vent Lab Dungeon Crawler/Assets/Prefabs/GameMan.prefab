@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843cd89e434572f46b03cab3fb3d6d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paletteColourSeperation: 0.15
+  paletteColourSeperation: 30
   pMinHue: 0
   pMaxHue: 1
   pMinSat: 0.4

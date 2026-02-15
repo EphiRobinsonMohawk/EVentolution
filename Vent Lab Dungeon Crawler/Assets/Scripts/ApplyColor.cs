@@ -12,7 +12,7 @@ public class ApplyPalette : MonoBehaviour
         tertiary
     }
 
-    void Start()
+    void Update()
     {
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
 
